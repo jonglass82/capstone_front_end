@@ -1,16 +1,20 @@
 <template>
-  <div class="home">
-<h1>Listings</h1>
-<router-link to="/route"><button> Create a Route</button></router-link> 
+  <div class="route">
+    <h1>Create a route</h1>
+
+
+  <h3>Listings</h3>
 
   <div v-for="listing in listings">
-    <h1>{{listing.address}}</h1>
+    <h2>{{listing.address}}</h2>
     <h3>{{listing.description}}</h3>
+
+    <input type="checkbox" id="checkbox" v-model="checked">
+<label for="checkbox">{{ checked }}</label>
   </div>
-
 </div>
-</template>
 
+</template>
 
 
 <script>
