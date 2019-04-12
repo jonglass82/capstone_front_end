@@ -10,8 +10,9 @@
     <h3>{{listing.description}}</h3>
 
     <input type="checkbox" id="checkbox" v-model="checked">
-<label for="checkbox">{{ checked }}</label>
+    <label for="checkbox">{{ checked }}</label>
   </div>
+
 </div>
 
 </template>
@@ -32,6 +33,7 @@ export default {
       this.listings = response.data.listings;
       console.log(this.listings);
     })
+    $('.modal-backdrop').remove();
   },
   methods: {}
 };
