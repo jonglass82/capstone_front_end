@@ -10,7 +10,8 @@
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
     "vue": "^2.6.6",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vuejs-datepicker": "^1.5.4"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.5.0",

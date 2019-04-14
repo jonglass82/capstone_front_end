@@ -10,19 +10,22 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Pick a date for your route:</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
+
+      <datepicker :inline="true" v-model="myDate"></datepicker>
+        <h1>{{myDate}}</h1>
         ...
       </div>
       <div class="modal-footer">
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-        <button type="button" class="btn btn-primary">Choose listings</button>
+        <button type="button" class="btn btn-primary" v-on:click="chooseListings()">Choose listings</button>
 
       </div>
     </div>
@@ -42,12 +45,17 @@
 <script>
 
 import axios from "axios";
+import Datepicker from 'vuejs-datepicker';
 
 export default {
   data: function () {
     return {
-      listings: []
+      listings: [],
+      myDate: null
     };
+  },
+    components: {
+    Datepicker
   },
   created: function() {
     axios.get("/listings").then(response => {
@@ -55,6 +63,10 @@ export default {
       console.log(this.listings);
     })
   },
-  methods: {}
+  methods: {
+    chooseListings: function() {
+      console.log("chooseListings!!!", this.myDate)
+    }
+  }
 };
 </script>
