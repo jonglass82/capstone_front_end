@@ -24,6 +24,8 @@
 #main{
   width: 90%;
   text-align: left;
+  overflow: scroll;
+  height: 600px;
 }
 #main div:nth-of-type(2n){
     background-color: aliceblue;
@@ -31,6 +33,7 @@
 
 #listingContainer{
   padding: 20px;
+
 }
 
 </style>

@@ -42,14 +42,13 @@
 </div>
 
 <div id="main" class="container">
-  <div v-for="listing in listings" v-bind:key="listing.id">
+  <div v-for="listing in listings">
 
     <div class="container" id="listingContainer">
     
     <h5>{{listing.address}}</h5>
     <p>{{listing.description}}</p>
-   <!--  <h4>{{listing.id}}</h4> -->
-    <button class="listingBtn" v-on:click="addToRoute()">Add to route</button>
+    <button class="listingBtn" v-on:click="addToRoute(listing.id)">Add to route</button>
 
   </div>
  
@@ -64,6 +63,8 @@
 #main{
   width: 90%;
   text-align: left;
+  overflow: scroll;
+  height: 600px;
 }
 #main div:nth-of-type(2n){
     background-color: aliceblue;
@@ -118,15 +119,14 @@ export default {
     });
 
     },
-    addToRoute: function () {
+    addToRoute: function (listingId) {
 
       var params = {
-        listing_id: this.listing.id
+        listing_id: listingId
       }
-       console.log(params);
 
       axios.post("/listings_routes",params).then(response => {
-      this.listing = response.data.listing;
+      this.listing = response.data;
 
        
 
