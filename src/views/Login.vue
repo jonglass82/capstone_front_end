@@ -8,11 +8,11 @@
           <li class="text-danger" v-for="error in errors">{{ error }}</li>
         </ul>
         <div class="form-group">
-          <label>Email:</label>
+          <label><h3>Email:</h3></label>
           <input type="email" class="form-control" v-model="email" />
         </div>
         <div class="form-group">
-          <label>Password:</label>
+          <label><h3>Password:</h3></label>
           <input type="password" class="form-control" v-model="password" />
         </div>
         <input type="submit" class="btn btn-primary" value="Submit" />
@@ -21,6 +21,14 @@
   </div>
 
 </template>
+
+<style type="text/css">
+  
+.login{
+  text-align: left;
+}
+
+</style>
 
 
 <script>
@@ -46,6 +54,7 @@ export default {
           localStorage.setItem("jwt", response.data.jwt);
           this.$emit("changeJwt");
           this.$router.push("/");
+          console.log(user.id)
         })
         .catch(error => {
           this.errors = ["Invalid email or password."];

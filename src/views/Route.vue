@@ -3,13 +3,13 @@
 <h1>Listings</h1>
 
 <div id="routeText">
-
+{{user.first_name}}
 <h3>{{myDate}}</h3>
 
 </div>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#routeModal">
-  Pick a date
+  Select date
 </button>
 
 <div class="modal fade" id="routeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -32,9 +32,7 @@
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-        <button type="button" class="btn btn-primary" v-model="myDate" data-dismiss="modal">Choose listings</button>
-
-   
+        <button type="button" class="btn btn-primary" v-model="myDate" data-dismiss="modal">Choose listings and create route</button>
 
       </div>
     </div>
@@ -64,7 +62,7 @@
   width: 90%;
   text-align: left;
   overflow: scroll;
-  height: 600px;
+  height: 500px;
 }
 #main div:nth-of-type(2n){
     background-color: aliceblue;
@@ -93,6 +91,7 @@ export default {
     return {
       listings: [],
       route: [],
+      user: [],
       listing_id: "",
       myDate: ""
     };
@@ -107,6 +106,11 @@ export default {
       this.listings = response.data.listings;
       console.log(this.listings);
     })
+
+    axios.get("/user/current_user").then(response => {
+      console.log("created", response.data);
+      this.user = response.data;
+    });
   },
 
   methods: {
@@ -119,18 +123,24 @@ export default {
     });
 
     },
-    addToRoute: function (listingId) {
 
+    addToRoute: function (listingId) {
       var params = {
         listing_id: listingId
       }
 
-      axios.post("/listings_routes",params).then(response => {
-      this.listing = response.data;
+ 
 
-       
+      // selectedListings.forEach(function(){
 
-    });
+      // axios.post("/listings_routes",params).then(response => {
+      // this.listing = response.data;
+
+      console.log(params);
+
+       // });
+
+    // });
 
     },
     

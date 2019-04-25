@@ -1,8 +1,10 @@
 <template>
   <div class="home">
-<h1>Listings</h1>
 
-<router-link to="/route">Create a route</router-link>
+    <h1>Listings</h1>
+
+    {{user.first_name}}
+    {{user.id}}
 
 <div class="container" id="main">
 
@@ -25,7 +27,7 @@
   width: 90%;
   text-align: left;
   overflow: scroll;
-  height: 600px;
+  height: 500px;
 }
 #main div:nth-of-type(2n){
     background-color: aliceblue;
@@ -49,7 +51,8 @@ export default {
 
   data: function () {
     return {
-      listings: []
+      listings: [],
+      user: []
     };
   },
 
@@ -60,8 +63,12 @@ export default {
   created: function() {
     axios.get("/listings").then(response => {
       this.listings = response.data.listings;
-      console.log(this.listings);
-    })
+    }),
+
+    axios.get("/user/current_user").then(response => {
+      console.log("created", response.data);
+      this.user = response.data;
+    });
   },
 
   methods: {}
