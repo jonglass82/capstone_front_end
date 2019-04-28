@@ -1,16 +1,24 @@
 <template>
   <div class="home">
-<h1>Listings</h1>
-
-<div id="routeText">
-{{user.first_name}}
-<h3>{{myDate}}</h3>
-
-</div>
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#routeModal">
   Select date
 </button>
+
+<div id="routeText">
+
+     <h3>Creating route for:</h3>
+      
+
+</div>
+
+<input type="text" name="routeId" v-model="route_id"><br>
+
+{{user.routes}}
+
+
+
+<h1>Listings</h1>
 
 <div class="modal fade" id="routeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -32,7 +40,7 @@
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-        <button type="button" class="btn btn-primary" v-model="myDate" data-dismiss="modal">Choose listings and create route</button>
+        <button type="button" class="btn btn-primary" v-model="myDate" data-dismiss="modal" v-on:click="createRoute(myDate, user)">Choose listings and create route</button>
 
       </div>
     </div>
@@ -46,7 +54,7 @@
     
     <h5>{{listing.address}}</h5>
     <p>{{listing.description}}</p>
-    <button class="listingBtn" v-on:click="addToRoute(listing.id)">Add to route</button>
+    <button class="listingBtn" v-on:click="addToRoute(listing.id, route_id)">Add to route</button>
 
   </div>
  
@@ -92,6 +100,8 @@ export default {
       listings: [],
       route: [],
       user: [],
+      listing_route: "",
+      route_id: "",
       listing_id: "",
       myDate: ""
     };
@@ -104,8 +114,7 @@ export default {
   created: function() {
     axios.get("/listings").then(response => {
       this.listings = response.data.listings;
-      console.log(this.listings);
-    })
+    }),
 
     axios.get("/user/current_user").then(response => {
       console.log("created", response.data);
@@ -114,37 +123,36 @@ export default {
   },
 
   methods: {
-    createRoute: function () {
+    createRoute: function (date,user) {
       var params = {
         date: this.myDate,
+        user: this.user.id
       }
+
+      console.log(params);
+
       axios.post("/routes",params).then(response => {
       this.route = response.data.route;
-    });
+      });
 
     },
 
     addToRoute: function (listingId) {
+
+    
       var params = {
-        listing_id: listingId
+        listing_id: listingId,
+        route_id: this.route_id
       }
 
- 
-
-      // selectedListings.forEach(function(){
-
-      // axios.post("/listings_routes",params).then(response => {
-      // this.listing = response.data;
-
-      console.log(params);
-
-       // });
-
-    // });
-
-    },
     
-  }
+      axios.post("/listings_routes",params).then(response => {
+      this.listing_route = response.data.listing_route;
+      });
+
+    }
+}
 
 };
+
 </script>
