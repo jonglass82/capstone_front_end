@@ -2,20 +2,24 @@
   <div class="home">
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#routeModal">
-  Select date
+  Begin a new route
 </button>
 
-<div id="routeText">
+<h2>~ OR ~ </h2>
 
-     <h3>Creating route for:</h3>
+<div id="routeText">
       
+      {{route_id}}
 
 </div>
 
-<input type="text" name="routeId" v-model="route_id"><br>
 
-{{user.routes}}
-
+   <select v-model="route_id">
+         <option value="" disabled="disabled" selected="selected"> Select a date for an exisintg route:</option>
+         <option v-for="user_route in user_routes">
+            {{user_route.date}}
+         </option>
+       </select>
 
 
 <h1>Listings</h1>
@@ -100,6 +104,7 @@ export default {
       listings: [],
       route: [],
       user: [],
+      user_routes: [],
       listing_route: "",
       route_id: "",
       listing_id: "",
@@ -112,14 +117,19 @@ export default {
   },
 
   created: function() {
+
     axios.get("/listings").then(response => {
       this.listings = response.data.listings;
-    }),
+    });
 
     axios.get("/user/current_user").then(response => {
-      console.log("created", response.data);
       this.user = response.data;
     });
+
+    axios.get("/routes").then(response => {
+      this.user_routes = response.data;
+    });
+
   },
 
   methods: {
@@ -129,10 +139,9 @@ export default {
         user: this.user.id
       }
 
-      console.log(params);
-
       axios.post("/routes",params).then(response => {
       this.route = response.data.route;
+      this.$router.push("/route");
       });
 
     },

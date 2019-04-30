@@ -1,10 +1,10 @@
 <template>
   <div class="home">
 
+    <div id="welcome"><h5>Welcome back {{user.first_name}}!</h5></div>
+
     <h1>Listings</h1>
 
-    {{user.first_name}}
-    {{user.id}}
 
 <div class="container" id="main">
 
@@ -29,6 +29,12 @@
   overflow: scroll;
   height: 500px;
 }
+
+#welcome{
+  text-align: right;
+  margin-right: 10%;
+}
+
 #main div:nth-of-type(2n){
     background-color: aliceblue;
 }

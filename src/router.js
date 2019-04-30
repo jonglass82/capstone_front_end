@@ -4,6 +4,7 @@ import Home from './views/Home.vue'
 import Route from './views/Route.vue'
 import Login from './views/Login.vue'
 import Logout from './views/Logout.vue'
+import Dashboard from './views/Dashboard.vue'
 
 
 Vue.use(Router)
@@ -31,6 +32,11 @@ export default new Router({
       path: '/logout',
       name: 'logout',
       component: Logout
+    },
+    {
+      path: '/dashboard',
+      name: 'dashboard',
+      component: Dashboard
     }
     // {
     //   path: '/about',

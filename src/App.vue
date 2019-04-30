@@ -4,6 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/login" v-if="!jwt">Login</router-link> 
       <router-link to="/route" v-if="jwt">Create a route</router-link> |
+         <router-link to="/dashboard" v-if="jwt">My Dashboard</router-link> |
       <router-link to="/logout" v-if="jwt">Logout</router-link> 
       
 
