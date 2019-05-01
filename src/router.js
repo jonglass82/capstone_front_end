@@ -5,6 +5,7 @@ import Route from './views/Route.vue'
 import Login from './views/Login.vue'
 import Logout from './views/Logout.vue'
 import Dashboard from './views/Dashboard.vue'
+import NewListing from './views/NewListing.vue'
 
 
 Vue.use(Router)
@@ -37,6 +38,11 @@ export default new Router({
       path: '/dashboard',
       name: 'dashboard',
       component: Dashboard
+    },
+    {
+      path: '/new_listing',
+      name: 'new_listing',
+      component: NewListing
     }
     // {
     //   path: '/about',
