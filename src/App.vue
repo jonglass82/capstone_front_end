@@ -11,6 +11,7 @@
 
     </div>
      <router-view v-on:changeJwt="setJwt()"/>
+
   </div>
 
 </template>
@@ -47,7 +48,8 @@
 export default {
   data: function() {
     return {
-      jwt: null
+      jwt: null,
+      success: []
     };
   },
   created: function() {

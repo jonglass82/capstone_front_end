@@ -5,6 +5,10 @@
 
     <form v-on:submit.prevent="submit()">
 
+                   <ul>
+          <li class="status" v-model="success">{{ success }}</li>
+        </ul>
+
     <div class="container">
 
       <div class="form-group">
@@ -58,7 +62,8 @@ export default {
       newAddress: "",
       newDescription: "",
       newCity: "",
-      newZipCode: ""
+      newZipCode: "",
+      errors: [],
     };
   },
 
@@ -81,10 +86,11 @@ export default {
         user: this.user.id
       }
 
-      console.log(params);
-
       axios.post("/listings",params).then(response => {
-      this.$router.push("/home");
+      this.$router.push("/listingConfirmation");
+      })
+      .catch(error => {
+          this.errors = ["Invalid email or password."];
       });
 
     },

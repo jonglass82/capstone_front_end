@@ -6,6 +6,7 @@ import Login from './views/Login.vue'
 import Logout from './views/Logout.vue'
 import Dashboard from './views/Dashboard.vue'
 import NewListing from './views/NewListing.vue'
+import ListingConfirmation from './views/ListingConfirmation.vue'
 
 
 Vue.use(Router)
@@ -43,6 +44,11 @@ export default new Router({
       path: '/new_listing',
       name: 'new_listing',
       component: NewListing
+    },
+    {
+      path: '/listingConfirmation',
+      name: 'listingConfirmation',
+      component: ListingConfirmation
     }
     // {
     //   path: '/about',
