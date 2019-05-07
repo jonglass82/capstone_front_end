@@ -1,19 +1,75 @@
 <template>
   <div class="dashboard">
-    <h1>Hello {{user.first_name}}!</h1>
 
-  <div id="myRoutes">
-    <h2>My routes:</h2>
-    {{user.routes}}
+    <div class="container">
+    <h2>Hello {{user.first_name}}!</h2>
   </div>
 
-    <div id="myListings:">
-    <h2>My listings:</h2>
-    {{user.listings}}
+  <br>
+
+    <div class="container">
+
+
+      <div id="myRoutes" class="container">
+      <h2>My Routes:</h2>
+
+      <div v-for="route in user.routes">
+
+        <div id="eachRoute">
+        {{route.date}}
+
+       </div>
+      </div>
+
+    </div>
+
   </div>
+
+<br>
+<br>
+
+<div class="container">
+    <div id="myListings" class="container">
+      <h2>Listings I have created:</h2>
+
+      <div v-for="listing in user.listings">
+
+        <div id="eachListing">
+    
+         {{listing.date}} {{listing.address}} {{listing.city}} {{listing.state}} {{listing.zip_code}}
+
+       </div>
+      </div>
+
+    </div>
+</div>
+
 
   </div>
 </template>
+
+
+
+<style type="text/css">
+  
+
+#eachListing{
+  padding: 10px;
+    border-top-width: 1pt;
+  border-top-style: solid;
+  border-top-color: grey;
+}
+
+#eachRoute{
+  padding: 10px;
+    border-top-width: 1pt;
+  border-top-style: solid;
+  border-top-color: grey;
+}
+
+
+
+</style>
 
 
 

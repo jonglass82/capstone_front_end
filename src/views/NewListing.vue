@@ -3,13 +3,27 @@
   <div class="new_listing">
     <h1>Create a new listing</h1>
 
+   <br>
+    <br>
+
     <form v-on:submit.prevent="submit()">
 
-                   <ul>
-          <li class="status" v-model="success">{{ success }}</li>
-        </ul>
+       <div class="container">
+
+       
+          <div class="status" v-model="success">{{ success }}</div>
+       
 
     <div class="container">
+
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#routeModal">
+  Select a date
+</button>
+
+<h4>{{myDate}}</h4>
+
+<br>
+<br>
 
       <div class="form-group">
     <input type="text" name="address" placeholder="address" v-model="newAddress"><br>
@@ -23,10 +37,15 @@
     <input type="text" name="City" placeholder="City" v-model="newCity">
 </div>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#routeModal">
-  Select a date
-</button>
+    <div class="form-group">
+    <input type="text" name="Zip Code" placeholder="Zip Code" v-model="newZipCode">
+</div>
 
+
+
+
+
+</div>
 
 <div class="modal fade" id="routeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -66,18 +85,30 @@
 
   </div>
 
-    <div class="form-group">
-    <input type="text" name="Zip Code" placeholder="Zip Code" v-model="newZipCode">
-</div>
+
 
 </div>
-
         <input type="submit" class="btn btn-primary" value="Create New Listing"/>
       </form>
+
 
   </div>
 
 </template>
+
+
+<style type="text/css">
+  
+.new_listing{
+  text-align: center;
+  align-content: center;
+}
+
+input{
+  width: 80%;
+}
+
+</style>
 
 
 

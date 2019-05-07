@@ -3,7 +3,12 @@
 
     <div id="welcome"><h5>Welcome back {{user.first_name}}!</h5></div>
 
+    <div id='map'></div>
+
+<div class="container" id="toolbar">
     <h1>Listings</h1>
+    {{listings.count}}
+  </div>
 
 
 <div class="container" id="main">
@@ -15,9 +20,8 @@
     <p>{{listing.description}}</p>
 
 
-
-
     <div class="listing-right">
+      {{listing.city}} {{listing.state}} {{listing.zip_code}}
 <button type="button" data-toggle="modal" data-target="#exampleModalCenter" v-on:click="viewListing(listing.id)">
   View Listing
 </button>
@@ -64,7 +68,7 @@
 
 #main{
   width: 90%;
-  text-align: left;
+ /* text-align: left;*/
   overflow: scroll;
   height: 500px;
 }
@@ -76,6 +80,11 @@
 
 #main div:nth-of-type(2n){
   /*  background-color: aliceblue;*/
+}
+
+#toolbar{
+  text-align: center;
+  padding: 20px;
 }
 
 #listingContainer{
@@ -91,6 +100,12 @@
   background-color: white;
 }
 
+#map { 
+  height: 250px;
+  width: 60%;
+  margin: auto;
+}
+
 </style>
 
 
@@ -104,23 +119,66 @@ export default {
     return {
       listings: [],
       user: [],
-      showListing: []
+      showListing: [],
+      monuments: [],
+      map: null,
+      jwt: null,
+      mapboxClient: null
     };
   },
 
-    components: {
+  mounted: function(){
+
+    mapboxgl.accessToken = 'pk.eyJ1Ijoiam9uZ2xhc3M4MiIsImEiOiJjanVkYmN3b2EwZjlmM3l0Y25kYmtua2VoIn0.7ND4G8md1orasleFIAAyRA';
+
+    var monument = [-87.623177, 41.881832];
+
+    this.map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/streets-v11', 
+      center: monument,
+      zoom: 11
+    });
+
+
+    var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
+    this.mapboxClient = mapboxClient;
+
+    axios.get("/listings").then(response => {
+      this.listings = response.data.listings;
+      this.listings.forEach(listing => {
+
+        this.mapboxClient.geocoding
+          .forwardGeocode({
+            query: listing.address,
+            autocomplete: false
+          })
+          .send()
+          .then(response => {
+           if (response && response.body && response.body.features && response.body.features.length) {
+
+             var feature = response.body.features[0];
+             console.log(feature);
+             new mapboxgl.Marker().setLngLat(feature.center).addTo(this.map);
+             listing.center = feature.center;
+          }
+        })
+
+       });
+    })
 
   },
 
   created: function() {
-    axios.get("/listings").then(response => {
-      this.listings = response.data.listings;
-    }),
+
 
     axios.get("/user/current_user").then(response => {
       console.log("created", response.data);
       this.user = response.data;
     });
+
+  
+
   },
 
   methods: {
