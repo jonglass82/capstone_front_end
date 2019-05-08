@@ -1,26 +1,27 @@
 <template>
-  <div class="home">
+  <div class="newRoute">
 
 <div id="map"></div>
 
     <div class="container" id="toolbar">
 
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#routeModal">
-  Begin a new route
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#routeModal">
+  Pick a date for your route
 </button>
 
- <h4>{{myDate}}</h4>
+<h3>Building route for:</h3>
 
-<h2>~ OR ~ </h2> -->
+ <h4>{{myDate}}</h4>
+{{route}}
 
 <div id="routeText">
 
-         <select v-model="route_id">
+<!--          <select v-model="route_id">
          <option value="" disabled="disabled" selected="selected"> Select a date for an existing route:</option>
          <option v-for="user_route in user_routes" v-bind:value="user_route.id">
             {{user_route.date}}
          </option>
-       </select>
+       </select> -->
 
        <div v-if="selectedRoute">
          <ul>
@@ -65,7 +66,7 @@
 
 
 
-<!-- <div class="modal fade" id="routeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="routeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -85,12 +86,12 @@
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-        <button type="button" class="btn btn-primary" v-model="myDate" data-dismiss="modal" v-on:click="createRoute(myDate, user)">Choose listings and create route</button>
+        <button type="button" class="btn btn-primary" v-model="myDate" data-dismiss="modal" v-on:click="createRoute(myDate, user)">Create route and choose listings</button>
 
       </div>
     </div>
   </div>
-</div> -->
+</div>
 
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -102,7 +103,6 @@
         </button>
       </div>
       <div class="modal-body">
-        helo
         
         <p>{{showListing.description}}</p>
         <h5>{{showListing.address}}</h5>
@@ -126,7 +126,7 @@
     <h5>{{listing.address}}</h5>
          <h5>{{listing.city + "," + " " + listing.state + " " + listing.zip_code}}</h5>
     <p>{{listing.description}}</p>
-    <button class="listingBtn" v-on:click="addToRoute(listing.id, route_id)">Add to route</button>
+    <button class="listingBtn" v-on:click="addToRoute(listing.id, route.id)">Add to route</button>
 
   </div>
 
@@ -291,18 +291,20 @@ export default {
       }
 
       axios.post("/routes",params).then(response => {
-      this.route = response.data.route;
-      this.$router.push("/route");
+
+      this.route = response.data;
+      this.$router.push("/newroute");
       });
 
     },
 
-    addToRoute: function (listingId) {
+    addToRoute: function (listingId, route) {
       var params = {
         listing_id: listingId,
-        route_id: this.route_id
+        route_id: this.route.id
       }
-
+      console.log(params);
+      
       axios.post("/listings_routes",params).then(response => {
       this.listing_route = response.data.listing_route;
       });

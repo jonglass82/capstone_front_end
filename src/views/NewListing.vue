@@ -23,7 +23,17 @@
 <h4>{{myDate}}</h4>
 
 <br>
-<br>
+
+  <div class="form-group">
+
+   <select v-model="newState">
+         <option value="" disabled="disabled" selected="selected" v-model="newState"> Select a state</option>
+         <option v-for="state in states">
+            {{state}}
+         </option>
+       </select>
+
+  </div>
 
       <div class="form-group">
     <input type="text" name="address" placeholder="address" v-model="newAddress"><br>
@@ -41,8 +51,14 @@
     <input type="text" name="Zip Code" placeholder="Zip Code" v-model="newZipCode">
 </div>
 
+<br>
 
+    <div>
+        Image: <input type="file" v-on:change="setFile($event)" ref="fileInput">
+      </div>
+        
 
+<br>
 
 
 </div>
@@ -73,18 +89,6 @@
     </div>
   </div>
 </div>
-
-  <div class="form-group">
-
-   <select v-model="newState">
-         <option value="" disabled="disabled" selected="selected" v-model="newState"> Select a state</option>
-         <option v-for="state in states">
-            {{state}}
-         </option>
-       </select>
-
-  </div>
-
 
 
 </div>
@@ -145,24 +149,56 @@ export default {
   },
 
   methods: {
-    submit: function () {
-      var params = {
-        address: this.newAddress,
-        description: this.newDescription,
-        city: this.newCity,
-        state: this.newState,
-        zip_code: this.newZipCode,
-        user: this.user.id
+  //   submit: function () {
+  //     var params = {
+  //       address: this.newAddress,
+  //       description: this.newDescription,
+  //       city: this.newCity,
+  //       state: this.newState,
+  //       zip_code: this.newZipCode,
+  //       user: this.user.id
+  //     }
+
+  //     axios.post("/listings",params).then(response => {
+  //     this.$router.push("/listingConfirmation");
+  //     })
+  //     .catch(error => {
+  //         this.errors = ["Invalid email or password."];
+  //     });
+
+  //   },
+  //       setFile: function(event) {
+  //     if (event.target.files.length > 0) {
+  //       this.image = event.target.files[0];
+  //     }
+   
+   
+  // },
+  setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
       }
-
-      axios.post("/listings",params).then(response => {
-      this.$router.push("/listingConfirmation");
-      })
-      .catch(error => {
-          this.errors = ["Invalid email or password."];
-      });
-
     },
+    submit: function() {
+      var formData = new FormData();
+      formData.append("address", this.newAddress);
+      formData.append("description", this.newDescription);
+      formData.append("city", this.newCity);
+      formData.append("state", this.newState);
+      formData.append("zip_code", this.newZipCode);
+      formData.append("image", this.image);
+
+      axios.post("/listings", formData).then(response => {
+        this.address = "";
+        this.description = "";
+        this.city = "";
+        this.state = "";
+        this.zip_code = "";
+        this.image = "";
+        this.$refs.fileInput.value = "";
+      });
+    
+  },
 
 }
 
@@ -170,3 +206,30 @@ export default {
 
 </script>
 
+ <!-- setFile: function(event) {
+      if (event.target.files.length > 0) {
+        this.image = event.target.files[0];
+      }
+    },
+    submit: function() {
+      var formData = new FormData();
+      formData.append("address", this.newAddress);
+      formData.append("description", this.newDescription);
+      formData.append("city", this.newCity);
+      formData.append("state", this.newState);
+      formData.append("zip_code", this.newZipCode);
+      formData.append("image", this.image);
+
+      axios.post("/listings", formData).then(response => {
+        this.address = "";
+        this.description = "";
+        this.city = "";
+        this.state = "";
+        this.zip_code = "";
+        this.image = "";
+        this.$refs.fileInput.value = "";
+      });
+    }
+  },
+
+ -->

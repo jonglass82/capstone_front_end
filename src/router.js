@@ -8,6 +8,8 @@ import Dashboard from './views/Dashboard.vue'
 import NewListing from './views/NewListing.vue'
 import ListingConfirmation from './views/ListingConfirmation.vue'
 import ShowListing from './views/ShowListing.vue'
+import NewRoute from './views/NewRoute.vue'
+import CreateRoute from './views/CreateRoute.vue'
 
 
 Vue.use(Router)
@@ -55,6 +57,16 @@ export default new Router({
       path: '/showListing',
       name: 'showListing',
       component: ShowListing
+    },
+    {
+      path: '/newroute',
+      name: 'newRoute',
+      component: NewRoute
+    },
+    {
+      path: '/createroute',
+      name: 'createRoute',
+      component: CreateRoute
     }
     // {
     //   path: '/about',

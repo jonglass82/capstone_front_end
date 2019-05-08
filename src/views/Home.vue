@@ -16,6 +16,7 @@
   <div v-for="listing in listings">
 
     <div class="container" id="listingContainer">
+
     <h5>{{listing.address}}</h5>
     <p>{{listing.description}}</p>
 
@@ -41,6 +42,8 @@
         </button>
       </div>
       <div class="modal-body">
+
+         <img :src="showListing.image_url">
         
         <p>{{showListing.description}}</p>
         <h5>{{showListing.address}}</h5>
