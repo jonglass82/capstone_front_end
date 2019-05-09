@@ -19,6 +19,7 @@
 
     <h5>{{listing.address}}</h5>
     <p>{{listing.description}}</p>
+    <h5>{{listing.date}}</h5>
 
 
     <div class="listing-right">
@@ -71,7 +72,7 @@
 
 #main{
   width: 90%;
- /* text-align: left;*/
+background-color: white;
   overflow: scroll;
   height: 500px;
 }
@@ -105,8 +106,8 @@
 
 #map { 
   height: 250px;
-  width: 60%;
-  margin: auto;
+  width: 100%;
+/*  margin: auto;*/
 }
 
 </style>

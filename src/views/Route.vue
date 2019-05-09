@@ -1,36 +1,30 @@
 <template>
-  <div class="home">
+  <div class="route">
 
 <div id="map"></div>
 
     <div class="container" id="toolbar">
 
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#routeModal">
-  Begin a new route
-</button>
-
- <h4>{{myDate}}</h4>
-
-<h2>~ OR ~ </h2> -->
-
 <div id="routeText">
 
          <select v-model="route_id">
-         <option value="" disabled="disabled" selected="selected"> Select a date for an existing route:</option>
+         <option value="" disabled="disabled" selected="selected"> Select your route </option>
          <option v-for="user_route in user_routes" v-bind:value="user_route.id">
             {{user_route.date}}
          </option>
        </select>
 
+      <br>
+       <br>
+
        <div v-if="selectedRoute">
          <ul>
-           <li v-for="listing in selectedRoute.listings">{{ listing.address }}</li>
+           <li v-for="listing in selectedRoute.listings"><h4>{{ listing.address + " " + listing.city + "," + " " + listing.state }}</h4></li>
          </ul>
          <p v-if="selectedRoute.listings.length === 0">No listings</p>
        </div>
 
-       <br>
-       <br>
+
 
   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#makeRoute" v-on:click="startRoute(showRoute.listings)">
   Start Driving!
@@ -51,8 +45,11 @@
         </button>
       </div>
       <div class="modal-body">
-
-        {{steps}}
+        <div v-for="step in steps">
+          <ul>
+            <li>{{step}}</li>
+          </ul>
+        </div>
     
       </div>
       <div class="modal-footer">
@@ -179,7 +176,7 @@
 }
 
 li{
-  text-decoration: none;
+  list-style-type: none;
 }
 
 </style>
@@ -276,7 +273,7 @@ export default {
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11', 
       center: monument,
-      zoom: 11
+      zoom: 3
     });
 
     var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
@@ -423,7 +420,7 @@ export default {
                 }
               },
               paint: {
-                "circle-radius": 10,
+                "circle-radius": 5,
                 "circle-color": "#3887be"
               }
             });

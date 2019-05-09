@@ -1,7 +1,7 @@
 <template>
   <div class="newRoute">
 
-<div id="map"></div>
+<!-- <div id="map"></div> -->
 
     <div class="container" id="toolbar">
 
@@ -9,10 +9,11 @@
   Pick a date for your route
 </button>
 
-<h3>Building route for:</h3>
+<h3>Then</h3>
+<!-- 
+ <h4>{{myDate}}</h4> -->
+<!-- {{route}} -->
 
- <h4>{{myDate}}</h4>
-{{route}}
 
 <div id="routeText">
 
@@ -23,7 +24,7 @@
          </option>
        </select> -->
 
-       <div v-if="selectedRoute">
+<!--        <div v-if="selectedRoute">
          <ul>
            <li v-for="listing in selectedRoute.listings">{{ listing.address }}</li>
          </ul>
@@ -31,10 +32,13 @@
        </div>
 
        <br>
-       <br>
+       <br> -->
 
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#makeRoute" v-on:click="startRoute(showRoute.listings)">
-  Start Driving!
+<!--   <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#makeRoute" v-on:click="startRoute(showRoute.listings)">
+  Choose my listings!
+</button> -->
+
+  <button><router-link to="/route">Choose my listings!</router-link>
 </button>
 
 
@@ -42,7 +46,7 @@
 </div>
 </div>
 
-<div class="modal fade" id="makeRoute" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="makeRoute" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -61,9 +65,7 @@
       </div>
     </div>
   </div>
-</div>
-
-
+</div> -->
 
 
 <div class="modal fade" id="routeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -86,25 +88,25 @@
 
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 
-        <button type="button" class="btn btn-primary" v-model="myDate" data-dismiss="modal" v-on:click="createRoute(myDate, user)">Create route and choose listings</button>
+        <button type="button" class="btn btn-primary" v-model="myDate" data-dismiss="modal" v-on:click="createRoute(myDate, user)">Create route</button>
 
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <!-- <h5 class="modal-title" id="exampleModalLongTitle"></h5> -->
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <h5 class="modal-title" id="exampleModalLongTitle"></h5> -->
+<!--         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body"> -->
         
-        <p>{{showListing.description}}</p>
+<!--         <p>{{showListing.description}}</p>
         <h5>{{showListing.address}}</h5>
         <h5>{{showListing.city}},{{showListing.state}} {{showListing.zip_code}}</h5>
   
@@ -114,8 +116,8 @@
       </div>
     </div>
   </div>
-</div>
-
+</div>  -->
+<!-- 
 <div id="main" class="container">
   <div v-for="listing in listings">
 
@@ -144,8 +146,8 @@
   </div>
  
   </div>
-</div>
-
+</div> -->
+ 
 </div>
 </template>
 

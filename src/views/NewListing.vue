@@ -3,7 +3,6 @@
   <div class="new_listing">
     <h1>Create a new listing</h1>
 
-   <br>
     <br>
 
     <form v-on:submit.prevent="submit()">
@@ -16,13 +15,11 @@
 
     <div class="container">
 
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#routeModal">
+<!--       <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#routeModal">
   Select a date
-</button>
+</button> -->
 
-<h4>{{myDate}}</h4>
-
-<br>
+<!-- <h4>{{myDate}}</h4> -->
 
   <div class="form-group">
 
@@ -34,6 +31,14 @@
        </select>
 
   </div>
+
+      <div class="form-group">
+    <input type="text" name="date" placeholder="Date" v-model="newDate"><br>
+  </div>
+
+<br>
+
+
 
       <div class="form-group">
     <input type="text" name="address" placeholder="address" v-model="newAddress"><br>
@@ -108,6 +113,10 @@
   align-content: center;
 }
 
+body{
+  background-color: #f9f9e5;
+}
+
 input{
   width: 80%;
 }
@@ -132,6 +141,7 @@ export default {
       newDescription: "",
       newCity: "",
       newZipCode: "",
+      newDate: "",
       errors: [],
       myDate: ""
     };
@@ -186,6 +196,7 @@ export default {
       formData.append("city", this.newCity);
       formData.append("state", this.newState);
       formData.append("zip_code", this.newZipCode);
+      formData.append("date", this.newDate);
       formData.append("image", this.image);
 
       axios.post("/listings", formData).then(response => {
@@ -195,6 +206,7 @@ export default {
         this.state = "";
         this.zip_code = "";
         this.image = "";
+        this.date = "";
         this.$refs.fileInput.value = "";
       });
     
@@ -206,30 +218,3 @@ export default {
 
 </script>
 
- <!-- setFile: function(event) {
-      if (event.target.files.length > 0) {
-        this.image = event.target.files[0];
-      }
-    },
-    submit: function() {
-      var formData = new FormData();
-      formData.append("address", this.newAddress);
-      formData.append("description", this.newDescription);
-      formData.append("city", this.newCity);
-      formData.append("state", this.newState);
-      formData.append("zip_code", this.newZipCode);
-      formData.append("image", this.image);
-
-      axios.post("/listings", formData).then(response => {
-        this.address = "";
-        this.description = "";
-        this.city = "";
-        this.state = "";
-        this.zip_code = "";
-        this.image = "";
-        this.$refs.fileInput.value = "";
-      });
-    }
-  },
-
- -->
