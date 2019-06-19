@@ -135,13 +135,13 @@ export default {
 
     mapboxgl.accessToken = 'pk.eyJ1Ijoiam9uZ2xhc3M4MiIsImEiOiJjanVkYmN3b2EwZjlmM3l0Y25kYmtua2VoIn0.7ND4G8md1orasleFIAAyRA';
 
-    var monument = [-87.623177, 41.881832];
+    var monument = [-88.0934, 42.1970];
 
     this.map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v11', 
       center: monument,
-      zoom: 11
+      zoom: 9
     });
 
 
